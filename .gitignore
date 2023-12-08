@@ -1,0 +1,15 @@
+#packages
+node_modules
+yarn.lock
+yarn-error.log
+
+#build
+dist/
+
+#prisma
+prisma/migrations/
+
+#env files
+.env
+
+README.md

@@ -1,0 +1,47 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "Bosta assessement",
+  "main": "app.js",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "scripts": {
+    "dev": "nodemon app.ts",
+    "build": "tsc",
+    "start": "node ./dist/app.js",
+    "test": "jest --watchAll --verbose",
+    "db:generate": "yarn prisma generate",
+    "db:pull": "yarn prisma db pull",
+    "db:migrate": "yarn db:generate && yarn prisma migrate dev --name init && yarn db:seed",
+    "db:seed": "yarn prisma db seed ",
+    "db:studio": "yarn prisma studio",
+    "docker-compose": "docker compose up --build -d"
+  },
+  "license": "UNLICENSED",
+  "author": "Mohamed Hassan",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.23.0",
+    "@types/bcrypt": "^5.0.1",
+    "@types/express": "^4.17.20",
+    "@types/jsonwebtoken": "^9.0.4",
+    "@types/node": "^20.8.10",
+    "eslint": "^8.50.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "prisma": "^5.5.2",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsc": "^2.0.4",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "dotenv-expand": "^10.0.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.22.4"
+  }
+}
