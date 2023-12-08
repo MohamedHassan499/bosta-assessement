@@ -6,7 +6,7 @@ export const seedUser = async () => {
     await prisma.user.create({
       data: {
         name: 'admin',
-        username: 'admin',
+        email: 'admin@gmail.com',
         password: await hash('admin'),
         role: {
           connectOrCreate: {
@@ -23,16 +23,16 @@ export const seedUser = async () => {
 
     await prisma.user.create({
       data: {
-        name: 'operator',
-        username: 'operator',
-        password: await hash('operator'),
+        name: 'borrower',
+        email: 'borrower@gmail.com',
+        password: await hash('borrower'),
         role: {
           connectOrCreate: {
             where: {
-              name: 'operator',
+              name: 'borrower',
             },
             create: {
-              name: 'operator',
+              name: 'borrower',
             },
           },
         },
