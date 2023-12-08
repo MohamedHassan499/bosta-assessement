@@ -14,10 +14,67 @@ model User {
 
   name     String
   password String
-  username    String @unique
+  email    String @unique
 
   role   Role? @relation(fields: [roleId], references: [id])
   roleId Int
+
+  borrowings Borrowing[]
+}
+
+
+model Book {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  title     String
+  author    String
+  publisher String
+  isbn      String
+  shelfLocation     String
+  quantity  Int
+  price     Float
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  borrowings Borrowing[]
+
+  // Non-clustering index
+  @@index([title], name: "title")
+  @@index([author], name: "author")
+}
+
+model Borrowing {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  borrowDate DateTime
+  returnDate DateTime
+
+  status BorrowingStatus @default(REQUESTED)
+
+  borrower   User @relation(fields: [borrowerId], references: [id])
+  borrowerId Int
+
+  book   Book @relation(fields: [bookId], references: [id])
+  bookId Int
+
+  // Non-clustering index
+  @@index([borrowDate], name: "borrowDate")
+  @@index([returnDate], name: "returnDate")
+}
+
+// Database noramlization 
+model Category {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  name String
+  books Book[]
 }
 
 model Role {
@@ -47,4 +104,10 @@ model RolePermission {
   roleId       Int
   permissionId Int
   permission   Permission @relation(fields: [permissionId], references: [id])
+}
+
+enum BorrowingStatus {
+  REQUESTED
+  BORROWED
+  RETURNED
 }
