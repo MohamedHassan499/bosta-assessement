@@ -22,6 +22,7 @@ export const updateUserSchema = yup
       .matches(/^[a-zA-z0-9]+$/, 'Password must be alphanumeric')
       .required('Password is required'),
     name: yup.string().required('Name is required'),
+    roleName: yup.string().oneOf(['borrower', 'admin']).optional(),
   })
   .nullable() // Using nullable to allow undefined or null values
 
