@@ -4,9 +4,9 @@ import { getBooks, getBookById, createBook, updateBook } from './book.model'
 const bookRouter = express.Router()
 
 bookRouter.get('/', getBooks)
-bookRouter.get('/:id', getBookById)
+bookRouter.get('/:isbn', getBookById)
 bookRouter.post('/', validateCreateBook, createBook)
-bookRouter.put('/:id', validateUpdateBook, updateBook)
-bookRouter.delete('/:id')
+bookRouter.put('/:isbn', validateUpdateBook, updateBook)
+bookRouter.delete('/:isbn')
 
 export default bookRouter

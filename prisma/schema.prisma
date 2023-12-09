@@ -30,7 +30,7 @@ model Book {
   title         String
   author        String
   publisher     String
-  isbn          String
+  isbn          String @unique
   shelfLocation String
   quantity      Int
   price         Float

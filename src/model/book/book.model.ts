@@ -28,13 +28,13 @@ export const getBooks = async (req: Request, res: Response) => {
 
 export const getBookById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params
-    if (!id) {
+    const { isbn } = req.params
+    if (!isbn) {
       res.status(400).send('Book ID is missing')
     }
     const book = await prisma.book.findUnique({
       where: {
-        id: Number(id),
+        isbn,
       },
     })
     res.status(200).json(book)
@@ -63,23 +63,21 @@ export const createBook = async (req: Request, res: Response) => {
       },
     })
     res.status(201).json(book)
-  } catch (e) {
-    console.error(e)
-    return res.status(500).json({
-      message: 'Internal Server Error',
-    })
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json(error)
   }
 }
 
 export const updateBook = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params
-    if (!id) {
+    const { isbn } = req.params
+    if (!isbn) {
       res.status(400).send('Book ID is missing')
     }
     const book = await prisma.book.update({
       where: {
-        id: Number(id),
+        isbn,
       },
       data: {
         ...req.body,
@@ -106,13 +104,13 @@ export const updateBook = async (req: Request, res: Response) => {
 
 export const deleteBook = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params
-    if (!id) {
+    const { isbn } = req.params
+    if (!isbn) {
       res.status(400).send('Book ID is missing')
     }
     const book = await prisma.book.delete({
       where: {
-        id: Number(req.params.id),
+        isbn,
       },
     })
     res.status(200).json(book)
