@@ -22,19 +22,18 @@ model User {
   borrowings Borrowing[]
 }
 
-
 model Book {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  title     String
-  author    String
-  publisher String
-  isbn      String
-  shelfLocation     String
-  quantity  Int
-  price     Float
+  title         String
+  author        String
+  publisher     String
+  isbn          String
+  shelfLocation String
+  quantity      Int
+  price         Float
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
@@ -56,11 +55,13 @@ model Borrowing {
 
   status BorrowingStatus @default(REQUESTED)
 
-  borrower   User @relation(fields: [borrowerId], references: [id])
-  borrowerId Int
+  // Don't delete the user when the borrowing is deleted
+  borrower   User? @relation(fields: [borrowerId], references: [id], onDelete: SetNull)
+  borrowerId Int?
 
-  book   Book @relation(fields: [bookId], references: [id])
-  bookId Int
+  // Don't delete the user when the borrowing is deleted
+  book   Book? @relation(fields: [bookId], references: [id], onDelete: SetNull)
+  bookId Int?
 
   // Non-clustering index
   @@index([borrowDate], name: "borrowDate")
@@ -73,7 +74,7 @@ model Category {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  name String @unique
+  name  String @unique
   books Book[]
 }
 
