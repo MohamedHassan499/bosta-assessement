@@ -26,7 +26,7 @@ export const getBooks = async (req: Request, res: Response) => {
   }
 }
 
-export const getBookById = async (req: Request, res: Response) => {
+export const getBookByIsbn = async (req: Request, res: Response) => {
   try {
     const { isbn } = req.params
     if (!isbn) {
