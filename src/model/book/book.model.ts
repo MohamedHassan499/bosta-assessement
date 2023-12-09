@@ -30,7 +30,7 @@ export const getBookById = async (req: Request, res: Response) => {
   try {
     const { isbn } = req.params
     if (!isbn) {
-      res.status(400).send('Book ID is missing')
+      res.status(400).send('Book ISBN is missing')
     }
     const book = await prisma.book.findUnique({
       where: {
@@ -73,7 +73,7 @@ export const updateBook = async (req: Request, res: Response) => {
   try {
     const { isbn } = req.params
     if (!isbn) {
-      res.status(400).send('Book ID is missing')
+      res.status(400).send('Book ISBN is missing')
     }
     const book = await prisma.book.update({
       where: {
@@ -106,7 +106,7 @@ export const deleteBook = async (req: Request, res: Response) => {
   try {
     const { isbn } = req.params
     if (!isbn) {
-      res.status(400).send('Book ID is missing')
+      res.status(400).send('Book ISBN is missing')
     }
     const book = await prisma.book.delete({
       where: {

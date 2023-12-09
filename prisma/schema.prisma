@@ -60,8 +60,8 @@ model Borrowing {
   borrowerId Int?
 
   // Don't delete the user when the borrowing is deleted
-  book   Book? @relation(fields: [bookId], references: [id], onDelete: SetNull)
-  bookId Int?
+  book     Book?   @relation(fields: [bookIsbn], references: [isbn], onDelete: SetNull)
+  bookIsbn String?
 
   // Non-clustering index
   @@index([borrowDate], name: "borrowDate")
