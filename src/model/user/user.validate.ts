@@ -12,19 +12,7 @@ export const createUserSchema = yup.object({
   name: yup.string().required('Name is required'),
 })
 
-export const updateUserSchema = yup
-  .object({
-    email: yup.string().email('Invalid Email').required('Email is required'),
-    password: yup
-      .string()
-      .min(8)
-      .max(32)
-      .matches(/^[a-zA-z0-9]+$/, 'Password must be alphanumeric')
-      .required('Password is required'),
-    name: yup.string().required('Name is required'),
-    roleName: yup.string().oneOf(['borrower', 'admin']).optional(),
-  })
-  .nullable() // Using nullable to allow undefined or null values
+export const updateUserSchema = createUserSchema.partial()
 
 export const validateCreateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -22,6 +22,9 @@ export const getUsers = async (req: Request, res: Response) => {
 export const getUserById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
+    if (!id) {
+      res.status(400).send('User ID is missing')
+    }
     const user = await prisma.user.findUnique({
       where: {
         id: Number(id),
@@ -81,6 +84,9 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
+    if (!id) {
+      res.status(400).send('User ID is missing')
+    }
     const {
       email,
       password,

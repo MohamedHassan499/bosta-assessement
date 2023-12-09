@@ -4,7 +4,7 @@
   "description": "Bosta assessement",
   "main": "app.js",
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed/book.seed.ts"
   },
   "scripts": {
     "dev": "nodemon app.ts",
@@ -22,6 +22,7 @@
   "author": "Mohamed Hassan",
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.0",
+    "@faker-js/faker": "^8.3.1",
     "@types/bcrypt": "^5.0.1",
     "@types/express": "^4.17.20",
     "@types/jsonwebtoken": "^9.0.4",
